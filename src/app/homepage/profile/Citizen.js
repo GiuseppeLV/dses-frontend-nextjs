@@ -1,0 +1,77 @@
+'use client'
+
+import React from 'react';
+import { Contracts } from '../tools/InitContracts';
+import { useEthers} from '@usedapp/core';
+import { ReadFunction } from '../tools/CallFunction';
+
+
+// Definizione del componente
+function Citizen({account}) {
+  //const {account,chainId}=useEthers()
+  console.log("account=", account)
+  const getCitizen=ReadFunction(Contracts().cityCitizenContract,'getCitizen',account)
+  console.log("cityNameee:", getCitizen)
+  let Profile;
+
+
+  let citizenName=getCitizen?.[0]
+  let citizenSurname=getCitizen?.[2]
+  let citizenBirthday=getCitizen?.[4]
+  let citizenEmail=getCitizen?.[3]
+  let telephone=getCitizen?.[5].toString()
+  let physicalAddress=getCitizen?.[6]
+  let id=getCitizen?.[7].toString()
+console.log("IDprofilo:", id)
+    Profile=[{
+        inputName:"Citizen name",
+        inputValue:citizenName
+    },
+    {
+        inputName:"Citizen surname",
+        inputValue:citizenSurname
+    },
+    {
+        inputName:"Citizen birthday",
+        inputValue:citizenBirthday
+    },
+    {
+        inputName:"Citizen Email",
+        inputValue:citizenEmail
+    },
+    {
+        inputName:"Telephone",
+        inputValue:telephone
+    },
+    {
+        inputName:"Physical Address",
+        inputValue:physicalAddress
+    },
+    {
+        inputName:"ID",
+        inputValue:id
+    }]
+
+   console.log("PROFILE:", Profile)
+  
+
+  return (<div>
+    <div>
+         <div className="bg-white shadow-md rounded-lg p-4">
+      <h2 className="text-xl font-semibold mb-4">User Informations</h2>
+      <div>
+      {citizenName && account?(Profile.map((item, key) => (       
+         <div className="p-2">
+             <p  className=" text-gray-600  font-bold ">{item.inputName}</p>
+             <p  className="text-gray-600  ">{item.inputValue}</p>
+        </div>
+          ))):<h2 className="text-l text-red-600 font-semibold mb-4">User doesn't exist</h2>}
+        </div>
+    </div>
+    </div>
+    </div>)
+}
+
+
+
+export default Citizen;
