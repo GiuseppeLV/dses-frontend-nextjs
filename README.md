@@ -1,5 +1,5 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
+## Introduction
+This is the front-end project for DSES, you can find the back-end in [https://github.com/GiuseppeLV/dses-backend-hardhat]
 ## Getting Started
 
 First, run the development server:
