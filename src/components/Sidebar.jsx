@@ -1,5 +1,5 @@
 'use client'
-import { User,Home, Earth, Warehouse, PersonStanding, History, FileBadge2,Trash2,HandCoins,Plus, Replace  } from "lucide-react"
+import { User,Home, Earth, Warehouse, PersonStanding, History, FileBadge2,Trash2,HandCoins,Plus, Replace, Search  } from "lucide-react"
 import UserInfo from "./UserInfo"
 import {
     Command,
@@ -57,6 +57,29 @@ const {account}=useEthers()
   },
 
     ]
+
+
+    const searchItems=[
+      {
+        link:"/homepage/search/State",
+        text:"State",
+        icon: <Earth/>,
+        roles:["admin","state","city", "citizen"],
+    },
+      {
+        link:"/homepage/search/City",
+        text:"City",
+        icon: <Warehouse/>,
+        roles:["admin","state","city","citizen"],
+    },
+    {
+      link:"/homepage/search/Citizen",
+      text:"Citizen",
+      icon: <PersonStanding/>,
+      roles:["admin","state","city", "citizen"],
+  },
+
+    ]
     const menuList=[
         {
             group:"General",
@@ -89,6 +112,13 @@ const {account}=useEthers()
                   icon: <FileBadge2/>,
                   roles:["citizen"],
                   isAccordion:false
+                },
+                {
+                  text:"Search entity",
+                  icon: <Search/>,
+                  roles:["citizen", "city", "admin", "state"],
+                  isAccordion:true,
+                  objects: searchItems
                 }
 
           ]
@@ -98,31 +128,27 @@ const {account}=useEthers()
         {
             group:"Operations",
             items:[
-              /*
-              {
-                link:"/homepage/add",
-                text:"State",
-                icon: <Earth/>,
-                roles:["admin"],
-                crudType:["add"]
-            },*/
+            
             {
               text:"State operations",
               icon: <Earth/>,
               roles:["admin"],
-              isAccordion:true
+              isAccordion:true,
+              objects: items
             },
             {
               text:"City operations",
               icon: <Warehouse/>,
               roles:["state"],
-              isAccordion:true
+              isAccordion:true,
+              objects: items
             },
             {
               text:"Citizen operations",
               icon: <PersonStanding/>,
               roles:["city"],
-              isAccordion:true
+              isAccordion:true,
+              objects:items
             },
             {
               link:"/homepage/send",
@@ -153,12 +179,12 @@ const {account}=useEthers()
               {option.icon}
               {option.text}
               </AccordionTrigger>
-              {items.map((crudType,crudKey)=> 
+              {option.objects.map((object,objectKey)=> 
                   <AccordionContent>             
-                  <Link key={crudKey} href={crudType.link} >
+                  <Link key={objectKey} href={object.link} >
                   <span className="flex justify-between space-x-4">
-                    {crudType.icon}
-                    {crudType.text}
+                    {object.icon}
+                    {object.text}
                   </span> 
                   </Link>
                   

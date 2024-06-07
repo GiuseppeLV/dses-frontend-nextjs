@@ -15,8 +15,7 @@ export default function RolePage() {
 
   return (
     <div>
-        <div>  
-          
+        <div>         
       {admin?<Admin/>:null} 
       {state?<State/>:null} 
       {city?<City/>:null} 

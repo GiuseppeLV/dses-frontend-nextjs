@@ -1,46 +1,43 @@
-import React from "react";
-import { Sepolia, useEthers, useTokenBalance, useLogs } from "@usedapp/core";
-import { ReadFunction } from "./tools/CallFunction";
-import { Contracts } from "./tools/InitContracts";
-import Admin from "./roles/Admin";
-import RolePage from "./page";
-import Link from "next/link";
-import PagesLayout from "./layout";
-import { redirect } from "next/navigation";
-
+import React from 'react';
+import { Sepolia, useEthers, useTokenBalance, useLogs } from '@usedapp/core';
+import Link from 'next/link';
+import { redirect, usePathname } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 export default function Wallet() {
-  const { activateBrowserWallet, account, deactivate,active } = useEthers();
-  let tokenBalance=account?(ReadFunction(Contracts().pollutionTokenContract, 'getBalanceOf', account)?.toString()):null
-  tokenBalance=tokenBalance/10**18
-
-        
-  //const tokenBalanceLocal = useTokenBalance(tokenAddress, account, { chainId: Localhost.chainId })
-  //const tokenBalanceSepolia = useTokenBalance(tokenAddress, account, { chainId: Sepolia.chainId })
-  const adminAddressLocal="0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
-  let isAdmin=false;
-  console.log("IsActivewallet:", active)
-  console.log("Account dentro wallet:", account)
+  const { activateBrowserWallet, account } = useEthers();
+  const router = useRouter();
+  const pathname = usePathname();
+  function redirectToHomepage() {
+    if (pathname == '/') {
+      router.push('/homepage');
+    }
+  }
   return (
-    <div>
-      {account ? (
-        console.log("homepe"),
-        redirect('/homepage')
-        
-
-      ) : (
-        <p>
-          Please connect wallet. <br />{" "}
-<Link href="/homepage">
-          <button onClick={() => activateBrowserWallet() }>
-            Connect Wallet
-          </button>
-          </Link>
-        </p>
-    
-      )
-      }      
-      
-     
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="text-center">
+        {account ? (
+          //redirect('/homepage')
+          redirectToHomepage()
+        ) : (
+          <div>
+            <h1 className="mb-8 text-6xl font-extrabold text-green-800">
+              Decentralized System for Environmental Sustainability
+            </h1>
+            <h4 className="mb-3 text-xl font-semibold tracking-tight text-gray-800">
+              Please connect wallet. <br />{' '}
+            </h4>
+            <Link href="/homepage">
+              <Button
+                className="h-12 px-6 m-2 text-lg text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg focus:shadow-outline hover:bg-indigo-800"
+                onClick={() => activateBrowserWallet()}
+              >
+                Connect Wallet
+              </Button>
+            </Link>
+          </div>
+        )}
       </div>
-  )
+    </div>
+  );
 }

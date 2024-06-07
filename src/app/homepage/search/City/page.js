@@ -3,15 +3,9 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import {
-  ReadFunction,
-  WriteFunction,
-  ReadFunctionNoArgs,
-} from '../tools/CallFunction';
-import { Contracts } from '../tools/InitContracts';
-import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
-import { TransactionStatus } from '../tools/TransactionStatus';
+import { useState } from 'react';
+
 import {
   Form,
   FormControl,
@@ -23,19 +17,17 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { isAddress } from 'ethers/lib/utils';
-import { useEthers } from '@usedapp/core';
+import City from '../../profile/City';
+import { useSigner } from '@usedapp/core';
 const formSchema = z.object({
   CityAddressKey: z.custom(isAddress, 'Invalid Address'),
 });
-export default function State() {
-  const { account } = useEthers();
-  const [sendDelete, statusDelete] = WriteFunction(
-    Contracts().dsesCenterContract,
-    'deleteCity',
-    ' deleting City',
-  );
 
-  const { toast } = useToast();
+export default function SearchForCity({ handleSearchAddress = 0 }) {
+  const signer = useSigner();
+  const [showForm, setShowForm] = useState(false);
+  const [cityAddress, setCityAddress] = useState(0);
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,26 +35,28 @@ export default function State() {
     },
   });
 
-  async function onSubmit(values) {
-    await sendDelete(values.CityAddressKey);
+  async function onSubmitKey(values) {
+    setShowForm(true);
+    setCityAddress(values.CityAddressKey);
+    if (handleSearchAddress != 0) {
+      handleSearchAddress(values.CityAddressKey);
+    }
   }
 
   return (
     <div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <form onSubmit={form.handleSubmit(onSubmitKey)} className="space-y-8">
           <FormField
             control={form.control}
             name="CityAddressKey"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>City Address Key</FormLabel>
+                <FormLabel>City Address</FormLabel>
                 <FormControl>
-                  <Input placeholder="address" {...field} />
+                  <Input placeholder="CityAddressKey" {...field} />
                 </FormControl>
-                <FormDescription>
-                  Insert City address to delete.
-                </FormDescription>
+                <FormDescription>Insert city address key</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -70,10 +64,13 @@ export default function State() {
           <Button type="submit">Submit</Button>
         </form>
       </Form>
-
-      <div>
-        <TransactionStatus transactionStatus={statusDelete} />
-      </div>
+      {showForm ? (
+        <div>
+          <div>
+            <City account={cityAddress} />
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
