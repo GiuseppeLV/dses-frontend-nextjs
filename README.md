@@ -104,12 +104,12 @@ root/
 ```
 
 ## Useful links
-Here are some links used in frontend:
-    - [Next.js App Router](https://nextjs.org/docs/app)
-    - [useDapp docs](https://usedapp-docs.netlify.app/docs)
-    - [ethers v5.7](https://docs.ethers.org/v5/)
-    - [bip 44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki)
-    - [shadcn ui](https://ui.shadcn.com/)
+Here are some links used in frontend: 
+    - [Next.js App Router](https://nextjs.org/docs/app) <br>
+    - [useDapp docs](https://usedapp-docs.netlify.app/docs) <br>
+    - [ethers v5.7](https://docs.ethers.org/v5/) <br>
+    - [bip 44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) <br>
+    - [shadcn ui](https://ui.shadcn.com/) <br>
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
