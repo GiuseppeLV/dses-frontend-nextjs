@@ -5,13 +5,13 @@ This is the front-end project for DSES, you can find the back-end in https://git
 Using CO2 sensors, sampling of carbon dioxide is carried out inside public transport exhausts (i.e. cars or buses) or industries. The result is converted into Pollution Tokens which will be deducted from the account of the entity that produced CO2 (in our case, the Citizen).
 PollutionTokens can be also traded for ETH. In DSES is the State responsable for that action.
 
-# Actors
+### Actors
  •**Admin** : is the one who has the main task of deploying, making changes to contracts and adding new states. 
 
  •**State** : the participating nation. It has the task of adding new cities to the dApp or removing them. It can also make token transfers to other states that request them.
 
  •**City** : the participating city. It has the task of adding new Citizens to the dApp or removing them. Each citizen will be assigned a new private key for the creation of a new wallet. 
- 
+
  •**Citizen** :the participating citizen. It will use the private key provided by the City to create a new wallet and access the dApp. It is the only entity capable of obtaining NFTs. Consume Pollution Token every time data is produced from the CO2 sensor.
 
 ## Installation
