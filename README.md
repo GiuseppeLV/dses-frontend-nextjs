@@ -7,8 +7,11 @@ PollutionTokens can be also traded for ETH. In DSES is the State responsable for
 
 # Actors
  •**Admin** : is the one who has the main task of deploying, making changes to contracts and adding new states. 
+
  •**State** : the participating nation. It has the task of adding new cities to the dApp or removing them. It can also make token transfers to other states that request them.
+
  •**City** : the participating city. It has the task of adding new Citizens to the dApp or removing them. Each citizen will be assigned a new private key for the creation of a new wallet. 
+ 
  •**Citizen** :the participating citizen. It will use the private key provided by the City to create a new wallet and access the dApp. It is the only entity capable of obtaining NFTs. Consume Pollution Token every time data is produced from the CO2 sensor.
 
 ## Installation
@@ -98,7 +101,7 @@ root/
 ├── .gitignore
 ├── package.json
 └── README.md
-
+```
 
 ## Useful links
     •[Next.js App Router](https://nextjs.org/docs/app)
