@@ -1,3 +1,5 @@
+# Decentralized System for Environmental Sustainability
+
 ## Introduction
 This is the front-end project for DSES, you can find the back-end in https://github.com/GiuseppeLV/dses-backend-hardhat.
 
