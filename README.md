@@ -51,18 +51,18 @@ root/
 │    │   │   ├── add/ => contains components to add new entities to the dApp.
 │    │   │   │   ├── Admin.js => admin adding state
 │    │   │   │   ├── City.js => city adding citizen. It contains some methods for HDWallet and BIP44,
-│    │   │   │   │              these generate a wallet for a Citizen using an ID (a number). Mnemonic phrase
-│    │   │   │   │              is recovered from the .env file.                            
+│    │   │   │   │              these generate a wallet for a Citizen using an ID (a number). Mnemonic
+│    │   │   │   │              phrase is recovered from the .env file.                            
 │    │   │   │   ├── State.js => state adding city
 │    │   │   │   └── page.js => this will render one of the above components if you are, respectively, 
-│    │   │   │                   an Admin, a State or a City. Other pages.js in some other route paths have a similar
-│    │   │   │                   function.
-│    │   │   ├── delete/ => contains components to delete entities from the dApp. The composition is similar
-│    │   │   │                      to the add/ folder.
+│    │   │   │                   an Admin, a State or a City. Other pages.js in some other route paths 
+│    │   │   │                   have a similar function.
+│    │   │   ├── delete/ => contains components to delete entities from the dApp. The composition is 
+│    │   │   │              similar to the add/ folder.
 │    │   |   ├── history/ => transactions history. Common to State,Admin and City.
 │    │   |   │
-│    │   │   ├── modify/ => route path path path used to change any states, citizens or cities by, respectively, an Admin, City or States
-│    │   │   │
+│    │   │   ├── modify/ => route path path path used to change any states, citizens or cities by, 
+│    │   │   │              respectively, an Admin, City or States
 │    │   │   ├── nfts/ => this shows nfts possessed by a Citizen
 │    │   │   │
 │    │   │   ├── notifications/ => shows notifications into a Bell icon 
@@ -73,7 +73,7 @@ root/
 │    │   │   │ 
 │    │   │   ├── profile/ => user profile route. Files are also used as components for other route paths.
 │    │   │   │ 
-│    │   │   ├── roles/ => contains components for the homepage route path for each of the entities. Each component contains some random code │    │   │   │   │         just to show something, only the Citizen.js one is the most important one.
+│    │   │   ├── roles/ => contains components for the homepage route path for each of the entities. Each component contains some random code just to show something, only the Citizen.js one is the most important one.
 │    │   │   │   │          
 │    │   │   │   └── Citizen.js => contains methods for consuming Pollution Tokens using a sensor. To do so, it's important to
 │    │   │   │                     recover the private key from the HDWallet using mnemonic phrase and the citizen's ID.     
@@ -104,11 +104,12 @@ root/
 ```
 
 ## Useful links
-    •[Next.js App Router](https://nextjs.org/docs/app)
-    •[useDapp docs](https://usedapp-docs.netlify.app/docs)
-    •[ethers v5.7](https://docs.ethers.org/v5/)
-    •[bip 44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki)
-    •[shadcn ui](https://ui.shadcn.com/)
+Here are some links used in frontend:
+    • [Next.js App Router](https://nextjs.org/docs/app)
+    • [useDapp docs](https://usedapp-docs.netlify.app/docs)
+    • [ethers v5.7](https://docs.ethers.org/v5/)
+    • [bip 44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki)
+    • [shadcn ui](https://ui.shadcn.com/)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
