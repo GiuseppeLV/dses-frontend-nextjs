@@ -33,7 +33,16 @@ bun dev
 
 Then open [http://localhost:3000](http://localhost:3000)
 
-Use [MetaMask](https://metamask.io/download/) to interact with the dApp.
+Use [MetaMask](https://metamask.io/download/) to interact with the dApp
+
+To run a sensor, just run the nodeSensor.js script using Node.js and
+the command:
+```bash 
+node nodeSensor.js
+```
+I used an Arduino Uno board with an HC-SR04 sensor just for testing values, 
+feel free to use other sensors to test or a real CO2 sensor. The arduinoSensor.ino
+contains script for sampling using HC-SR04 sensor. This has to be uploaded to the board.
 
 ## Architecture
 
@@ -97,14 +106,15 @@ root/
 │   ├── X.json => Contracts ABIs (where X is one of the entities)
 │   └── NetworkMapping.json => Contracts Addresses
 |   
-|   
+├── nodeSensor.js => running a node with Node.js to send values to this frontend. It's important to setup the correct serial port
+├── arduinoSensor.ino => example script for Arduino Uno board with HC-SR04  
 ├── .gitignore
 ├── package.json
 └── README.md
 ```
 
 ## Useful links
-Here are some links used in frontend: 
+Here are some links used in frontend: <br>
     - [Next.js App Router](https://nextjs.org/docs/app) <br>
     - [useDapp docs](https://usedapp-docs.netlify.app/docs) <br>
     - [ethers v5.7](https://docs.ethers.org/v5/) <br>
