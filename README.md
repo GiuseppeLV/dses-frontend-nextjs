@@ -22,6 +22,7 @@ First of all clone the repository locally: ```git clone https://github.com/Giuse
 ## Running the server
 
 If you want to run a node locally (```yarn hardhat node``` from the back-end), please remove commented code from ```src/app/homepage/config.js``` and add ```Hardhat``` item in the ```networks``` list, so that Hardhat network can be recognized correctly. Also, add an rpcUrl of your choice to interact with Sepolia, you can use something like Infura or Alchemy.
+Also config a correct ```.env``` file.
 
 Now, run the development server:
 
