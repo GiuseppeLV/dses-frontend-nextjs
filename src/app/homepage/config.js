@@ -1,5 +1,3 @@
-'use client';
-
 import {
   Mainnet,
   DAppProvider,
@@ -9,18 +7,15 @@ import {
   Hardhat,
   useCall,
 } from '@usedapp/core';
-
-const SEPOLIA_URL = process.env.SEPOLIA_RPC_URL;
-const LOCALHOST_URL = process.env.LOCALHOST_RPC_URL;
-
+console.log('Sepoliarpc:', Sepolia.rpcUrl);
 export const config = {
-  networks: [Sepolia],
-  readOnlyChainId: Sepolia.chainId,
+  networks: [Sepolia], //ADD Hardhat FOR LOCAL TEST
+  readOnlyChainId: Sepolia.chainId, //REMOVE COMMENT FOR LOCAL TEST
   //readOnlyChainId: Hardhat.chainId,
   readOnlyUrls: {
-    [Sepolia.chainId]: SEPOLIA_URL,
+    [Sepolia.chainId]: Sepolia.rpcUrl,
 
-    //[Hardhat.chainId]: LOCALHOST_URL,
+    //[Hardhat.chainId]: Hardhat.rpcUrl, //REMOVE COMMENT FOR LOCAL TEST
   },
   notifications: {
     expirationPeriod: 10000, //millisecondi
