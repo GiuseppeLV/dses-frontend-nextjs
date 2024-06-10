@@ -45,7 +45,7 @@ the command:
 ```bash 
 node nodeSensor.js
 ```
-I used an Arduino Uno board with an HC-SR04 sensor just for testing values, 
+I used an Arduino Uno board with an HC-SR04 sensor just for testing values as a Citizen, 
 feel free to use other sensors to test or a real CO2 sensor. The arduinoSensor.ino
 contains script for sampling using HC-SR04 sensor. This has to be uploaded to the board.
 
