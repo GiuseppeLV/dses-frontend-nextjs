@@ -9,13 +9,13 @@ import {
 } from '@usedapp/core';
 console.log('Sepoliarpc:', Sepolia.rpcUrl);
 export const config = {
-  networks: [Sepolia], //ADD Hardhat FOR LOCAL TEST
+  networks: [Sepolia, Hardhat], //ADD Hardhat FOR LOCAL TEST
   readOnlyChainId: Sepolia.chainId, //REMOVE COMMENT FOR LOCAL TEST
-  //readOnlyChainId: Hardhat.chainId,
+  readOnlyChainId: Hardhat.chainId,
   readOnlyUrls: {
     [Sepolia.chainId]: Sepolia.rpcUrl,
 
-    //[Hardhat.chainId]: Hardhat.rpcUrl, //REMOVE COMMENT FOR LOCAL TEST
+    [Hardhat.chainId]: Hardhat.rpcUrl, //REMOVE COMMENT FOR LOCAL TEST
   },
   notifications: {
     expirationPeriod: 10000, //millisecondi

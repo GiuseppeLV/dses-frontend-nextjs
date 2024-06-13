@@ -3,7 +3,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { useToast } from '@/components/ui/use-toast';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -20,7 +19,7 @@ import {
   WriteFunction,
   ReadFunctionNoArgs,
 } from '../tools/CallFunction';
-import { useEthers } from '@usedapp/core';
+
 import { useEffect, useState } from 'react';
 import { TransactionStatus } from '../tools/TransactionStatus';
 import { Contracts } from '../tools/InitContracts';
@@ -88,28 +87,40 @@ export default function City({
       PhysicalAddress: '',
     },
   });
-  let contratto = new ethers.Contract(
+  let contractInstance = new ethers.Contract(
     Contracts().cityCitizenContract.address,
     Contracts().cityCitizenContract.interface,
     signer,
   );
-  let contractIn = contratto.connect(signer);
-  const { toast } = useToast();
+  let contractIn = contractInstance.connect(signer);
+
   async function getAddress() {
     const rootWallet = ethers.utils.HDNode.fromMnemonic(
       await getMnemonicData(),
     );
     let id = parseInt(userCount) + 1;
-    console.log('PATHcit:', `m/44'/60'/0'/0/${id}`);
-    let childWallet = rootWallet.derivePath(`m/44'/60'/0'/0/${id}`); //+1 because in the addCitizen function in the CityCitizen contract, first the id is incresed and then read and stored in the citizen struct
+    let accountRand = generateRandoms().account;
+    let extIntRand = generateRandoms().extInt;
+    let indexRand = generateRandoms().index;
+    id = accountRand + '-' + extIntRand + '-' + indexRand;
+    console.log(
+      'Derive PATH:',
+      `m/44'/60'/${accountRand}/${extIntRand}/${indexRand}`,
+    );
+    let childWallet = rootWallet.derivePath(
+      `m/44'/60'/${accountRand}/${extIntRand}/${indexRand}`,
+    );
 
     if (isModify) {
       console.log('OK');
       try {
         const citizen = await contractIn.getCitizen(citizenAddress);
-        console.log('nano:', citizen);
-        id = citizen?.[7].toString();
-        childWallet = rootWallet.derivePath(`m/44'/60'/0'/0/${id}`);
+        id = citizen?.[7];
+        let idsArray = id.split('-');
+
+        childWallet = rootWallet.derivePath(
+          `m/44'/60'/${idsArray[0]}/${idsArray[1]}/${idsArray[2]}`,
+        );
       } catch (error) {
         console.error('Error during getCitizen:', error);
       }
@@ -117,12 +128,10 @@ export default function City({
     return [id, childWallet];
   }
 
-  // 2. Define a submit handler.
   async function onSubmit(values) {
     const currentDate = new Date();
     const timestampInMilliseconds = currentDate.getTime();
     const timestamp = Math.floor(timestampInMilliseconds / 1000); //in seconds
-    console.log('Valori:', values.CitizenDateOfBirth);
     const [id, wallet] = await getAddress();
     console.log('ID:', id, 'ADDRESS:', wallet);
     await sendAddCitizen(
@@ -134,18 +143,11 @@ export default function City({
       values.CitizenDateOfBirth,
       values.Telephone,
       values.PhysicalAddress,
+      id,
       isModify,
     );
 
     setPrivateKey(wallet.privateKey);
-    toast({
-      title:
-        values.CitizenName +
-        ' ' +
-        values.CitizenSurname +
-        ' added successfully',
-      description: 'Address:' + wallet.address,
-    });
   }
   const getMnemonicData = async () => {
     const res = await fetch('/api', {
@@ -208,4 +210,12 @@ export default function City({
       </div>
     </div>
   );
+}
+
+function generateRandoms() {
+  const random1 = Math.floor(Math.random() * 999999999);
+  const random2 = Math.floor(Math.random() * 999999999);
+  const random3 = Math.floor(Math.random() * 999999999);
+
+  return { account: random1, extInt: random2, index: random3 };
 }

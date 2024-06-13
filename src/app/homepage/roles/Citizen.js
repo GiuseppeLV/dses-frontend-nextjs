@@ -28,11 +28,10 @@ function Citizen() {
 
     return () => clearInterval(interval);
   }, [check]);
-  let id = getCitizen?.[7].toString();
+  let id = getCitizen?.[7];
   let wallet;
   let pK;
 
-  console.log('identificativo:', id);
   getPhraseCall().then((result) => {
     setCitWallet(result);
   });
@@ -49,7 +48,7 @@ function Citizen() {
         const responseJson = await response.json();
         const value = responseJson['data'];
         if (value != 0) {
-          let reducedValue = value / 200;
+          let reducedValue = value / 50;
           await consumePollutionToken(
             ethers.utils.parseUnits(reducedValue.toString(), 18),
           );
@@ -85,7 +84,11 @@ function Citizen() {
     ? ethers.utils.HDNode.fromMnemonic(citWallet)
     : null;
   if (id && rootWallet != null) {
-    const childWallet = rootWallet.derivePath(`m/44'/60'/0'/0/${id}`);
+    let idsArray = id.split('-');
+
+    const childWallet = rootWallet.derivePath(
+      `m/44'/60'/${idsArray[0]}/${idsArray[1]}/${idsArray[2]}`,
+    );
     pK = childWallet.privateKey;
     wallet = new ethers.Wallet(childWallet.privateKey, library);
   }
