@@ -65,7 +65,7 @@ root/
 │    │   │   ├── add/ => contains components to add new entities to the dApp.
 │    │   │   │   ├── Admin.js => admin adding state
 │    │   │   │   ├── City.js => city adding citizen. It contains some methods for HDWallet and BIP44,
-│    │   │   │   │              these generate a wallet for a Citizen using an ID (a number). Mnemonic
+│    │   │   │   │              these generate a wallet for a Citizen using an ID (a random number, generate with Math.rand). Mnemonic
 │    │   │   │   │              phrase is recovered from the .env file.                            
 │    │   │   │   ├── State.js => state adding city
 │    │   │   │   └── page.js => this will render one of the above components if you are, respectively, 
