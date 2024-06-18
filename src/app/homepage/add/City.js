@@ -98,7 +98,6 @@ export default function City({
     const rootWallet = ethers.utils.HDNode.fromMnemonic(
       await getMnemonicData(),
     );
-    let id = parseInt(userCount) + 1;
     let accountRand = generateRandoms().account;
     let extIntRand = generateRandoms().extInt;
     let indexRand = generateRandoms().index;
@@ -112,7 +111,6 @@ export default function City({
     );
 
     if (isModify) {
-      console.log('OK');
       try {
         const citizen = await contractIn.getCitizen(citizenAddress);
         id = citizen?.[7];
